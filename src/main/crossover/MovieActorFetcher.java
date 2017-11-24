@@ -11,7 +11,7 @@ public class MovieActorFetcher {
         return commonActors;
     }
 
-    Set<String> commonActors = null;
+    private Set<String> commonActors = null;
     public MovieActorFetcher(String movie1, String movie2){
         MovieActorModel movieActorModel1 = new MovieActorModel(movie1);
         MovieActorModel movieActorModel2 = new MovieActorModel(movie2);
