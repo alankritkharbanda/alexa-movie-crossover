@@ -3,7 +3,11 @@ package main.crossover;
 import com.amazonaws.util.json.JSONArray;
 import com.amazonaws.util.json.JSONObject;
 
+import main.httpconnection.ConnectionManager;
 import main.java.helloworld.HelloWorldSpeechlet;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpUriRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.io.*;
@@ -55,11 +59,10 @@ public class MovieActorModel {
         String url = "http://www.theimdbapi.org/api/find/movie?title=" + movie.replace(" ", "+");
         InputStream is = null;
         try {
-            URL obj = new URL(url);
-            HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-            con.setRequestMethod("GET");
-            con.setRequestProperty("User-Agent", "Mozilla/5.0");
-            is = con.getInputStream();
+            HttpUriRequest httpUriRequest = new HttpGet(url);
+            httpUriRequest.setHeader("Connection", "Keep-Alive");
+            CloseableHttpResponse closeableHttpResponse = ConnectionManager.httpClient.execute(httpUriRequest);
+            is = closeableHttpResponse.getEntity().getContent();
             BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
             String jsonText = readAll(rd);
             JSONArray json = new JSONArray(jsonText);

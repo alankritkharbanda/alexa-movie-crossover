@@ -14,6 +14,13 @@
         <property name="timestampTolerance" value="150"/>
     </properties>
     <dependencies>
+        <!-- https://mvnrepository.com/artifact/commons-threadpool/commons-threadpool -->
+        <dependency>
+            <groupId>commons-threadpool</groupId>
+            <artifactId>commons-threadpool</artifactId>
+            <version>20030513.073905</version>
+        </dependency>
+
         <dependency>
             <groupId>com.amazon.alexa</groupId>
             <artifactId>alexa-skills-kit</artifactId>
